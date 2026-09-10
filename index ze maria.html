@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <!-- Faz a página se ajustar bem ao celular -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Como fazer café coado em casa | Zé Maria Cafés Especiais</title>
+  <meta name="description" content="Receita passo a passo de café coado para extrair o melhor de um grão que ficou entre os 50 melhores do Coffee of the Year.">
+
+  <!-- Fontes do Google Fonts (precisa de internet para carregar) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================================
+       1. CORES E MEDIDAS
+       Troque as cores aqui e elas mudam na página inteira.
+       ========================================================= */
+    :root {
+      --torra: #2A1B14;        /* marrom de torra, fundo escuro */
+      --cafe: #5A2E1E;         /* café na xícara */
+      --cereja: #8E2B25;       /* cereja madura do café */
+      --mel: #D9A441;          /* melado, cor de destaque */
+      --creme: #F3E9DA;        /* fundo claro */
+      --papel: #FBF7F0;        /* papel de filtro */
+
+      --largura-max: 1100px;
+      --fonte-titulo: "Young Serif", Georgia, serif;
+      --fonte-texto: "Figtree", system-ui, sans-serif;
+    }
+
+    /* =========================================================
+       2. AJUSTES BÁSICOS
+       ========================================================= */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth; /* rolagem suave ao clicar nos links */
+    }
+
+    body {
+      font-family: var(--fonte-texto);
+      font-size: 1.125rem;
+      line-height: 1.6;
+      color: var(--torra);
+      background: var(--papel);
+    }
+
+    a {
+      color: inherit;
+    }
+
+    /* Contorno visível para quem navega pelo teclado (tecla Tab) */
+    a:focus-visible {
+      outline: 3px solid var(--mel);
+      outline-offset: 4px;
+      border-radius: 4px;
+    }
+
+    h1, h2, h3 {
+      font-family: var(--fonte-titulo);
+      font-weight: 400;
+      line-height: 1.15;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.4rem;
+    }
+
+    /* Caixa que centraliza o conteúdo */
+    .container {
+      max-width: var(--largura-max);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Espaço padrão entre seções */
+    .secao {
+      padding-top: 5.5rem;
+      padding-bottom: 5.5rem;
+    }
+
+    .texto-intro {
+      max-width: 38rem;
+      margin-bottom: 3rem;
+    }
+
+    /* Botão */
+    .botao {
+      display: inline-block;
+      padding: 0.9rem 1.8rem;
+      border-radius: 999px;
+      background: var(--mel);
+      color: var(--torra);
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 0.15s ease;
+    }
+
+    .botao:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Marcação amarela para dados que você PRECISA preencher.
+       Troque o texto e apague a classe "preencher" depois. */
+    .preencher {
+      background: #FFE58A;
+      color: var(--torra);
+      padding: 0 0.35em;
+      border-radius: 3px;
+      outline: 2px dashed var(--cereja);
+    }
+
+    /* =========================================================
+       3. HERO (primeira parte da página, fundo escuro)
+       ========================================================= */
+    .hero {
+      background: var(--torra);
+      color: var(--creme);
+    }
+
+    .topo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+    }
+
+    .logo {
+      font-family: var(--fonte-titulo);
+      font-size: 1.4rem;
+      text-decoration: none;
+    }
+
+    .topo-link {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .hero-conteudo {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      align-items: center;
+      gap: 3rem;
+      padding-top: 3rem;
+      padding-bottom: 5rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.6rem, 6.5vw, 5rem);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero p {
+      max-width: 34rem;
+      margin-bottom: 2.25rem;
+      color: #E3D4C0;
+    }
+
+    /* Selo do Coffee of the Year */
+    .selo {
+      display: inline-block;
+      border: 2px solid var(--mel);
+      color: var(--mel);
+      border-radius: 999px;
+      padding: 0.35rem 1rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 1.75rem;
+    }
+
+    .ilustracao {
+      width: 100%;
+      max-width: 340px;
+      justify-self: center;
+    }
+
+    /* A gota que pinga do coador: a única animação da página */
+    .gota {
+      animation: pingar 2.4s ease-in infinite;
+    }
+
+    @keyframes pingar {
+      0%   { transform: translateY(0);    opacity: 0; }
+      15%  { opacity: 1; }
+      80%  { opacity: 1; }
+      100% { transform: translateY(85px); opacity: 0; }
+    }
+
+    /* Respeita quem prefere menos movimento na tela */
+    @media (prefers-reduced-motion: reduce) {
+      .gota { animation: none; }
+      html { scroll-behavior: auto; }
+    }
+
+    /* =========================================================
+       4. O QUE VOCÊ VAI PRECISAR
+       ========================================================= */
+    .materiais {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem 3rem;
+      max-width: 50rem;
+    }
+
+    .materiais li {
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    /* Bolinha em forma de grão antes de cada item */
+    .materiais li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 10px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--cereja);
+    }
+
+    .materiais small {
+      color: #6B5446;
+      font-size: 0.95rem;
+    }
+
+    /* =========================================================
+       5. AS TRÊS VARIÁVEIS (proporção, temperatura, moagem)
+       ========================================================= */
+    .variaveis {
+      background: var(--creme);
+    }
+
+    .variaveis-grade {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+    }
+
+    .variavel {
+      border-top: 3px solid var(--torra);
+      padding-top: 1.25rem;
+    }
+
+    /* O valor principal de cada variável */
+    .variavel .valor {
+      font-family: var(--fonte-titulo);
+      font-size: 1.9rem;
+      line-height: 1.2;
+      color: var(--cereja);
+      margin-bottom: 0.9rem;
+    }
+
+    .variavel p {
+      font-size: 1.05rem;
+    }
+
+    .variavel p + p {
+      margin-top: 0.75rem;
+    }
+
+    /* =========================================================
+       6. A RECEITA (linha do tempo com cronômetro)
+       ========================================================= */
+    .receita {
+      background: var(--torra);
+      color: var(--creme);
+    }
+
+    .receita .texto-intro {
+      color: #E3D4C0;
+    }
+
+    .passos {
+      list-style: none;
+      max-width: 52rem;
+    }
+
+    .passo {
+      display: grid;
+      grid-template-columns: 7rem 1fr;
+      gap: 2rem;
+      padding-bottom: 2.5rem;
+      position: relative;
+    }
+
+    /* Linha vertical que liga os passos */
+    .passo::before {
+      content: "";
+      position: absolute;
+      left: 7rem;
+      top: 0.4rem;
+      bottom: 0;
+      width: 2px;
+      background: rgba(243, 233, 218, 0.2);
+      margin-left: 1rem;
+    }
+
+    .passo:last-child::before {
+      display: none;
+    }
+
+    /* O tempo do cronômetro */
+    .tempo {
+      font-family: var(--fonte-titulo);
+      font-size: 2rem;
+      line-height: 1;
+      color: var(--mel);
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .tempo-texto {
+      font-size: 1.3rem;
+      padding-top: 0.4rem;
+    }
+
+    .passo-texto {
+      padding-left: 1.5rem;
+    }
+
+    .passo-texto p {
+      color: #E3D4C0;
+      max-width: 36rem;
+    }
+
+    /* =========================================================
+       7. AJUSTE PELO GOSTO
+       ========================================================= */
+    .ajustes {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+
+    .ajuste {
+      padding: 2rem;
+      border-radius: 20px;
+      background: var(--creme);
+    }
+
+    .ajuste h3 {
+      color: var(--cereja);
+    }
+
+    /* =========================================================
+       8. SOBRE ESTE CAFÉ
+       ========================================================= */
+    .sobre {
+      border-top: 2px solid var(--creme);
+    }
+
+    .sobre-grade {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .ficha {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.9rem 1.5rem;
+    }
+
+    .ficha dt {
+      font-weight: 700;
+    }
+
+    /* =========================================================
+       9. CHAMADA FINAL E RODAPÉ
+       ========================================================= */
+    .chamada {
+      background: var(--cereja);
+      color: var(--papel);
+      text-align: center;
+    }
+
+    .chamada p {
+      max-width: 32rem;
+      margin: 0 auto 2rem;
+    }
+
+    .rodape {
+      padding: 2rem 0;
+      background: var(--torra);
+      color: #CDBBA5;
+      font-size: 0.95rem;
+    }
+
+    /* =========================================================
+       10. CELULAR (telas menores que 800px)
+       ========================================================= */
+    @media (max-width: 800px) {
+      .secao {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+      }
+
+      .hero-conteudo,
+      .variaveis-grade,
+      .ajustes,
+      .sobre-grade {
+        grid-template-columns: 1fr;
+      }
+
+      .logo {
+        font-size: 1.1rem;
+        line-height: 1.25;
+      }
+
+      .topo-link {
+        white-space: nowrap;
+      }
+
+      .selo {
+        border-radius: 16px;
+      }
+
+      .hero-conteudo {
+        padding-top: 1rem;
+        gap: 2rem;
+      }
+
+      .ilustracao {
+        max-width: 200px;
+        order: -1; /* ilustração aparece acima do texto */
+      }
+
+      .materiais {
+        grid-template-columns: 1fr;
+      }
+
+      .variaveis-grade {
+        gap: 2.5rem;
+      }
+
+      .sobre-grade {
+        gap: 2rem;
+      }
+
+      .passo {
+        grid-template-columns: 4.5rem 1fr;
+        gap: 1rem;
+      }
+
+      .passo::before {
+        left: 4.5rem;
+        margin-left: 0.5rem;
+      }
+
+      .tempo {
+        font-size: 1.5rem;
+      }
+
+      .tempo-texto {
+        font-size: 1rem;
+      }
+
+      .passo-texto {
+        padding-left: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===================== HERO ===================== -->
+  <header class="hero">
+    <div class="topo container">
+      <a class="logo" href="#">Zé Maria Cafés Especiais</a>
+      <!-- Troque o # pelo link da sua loja -->
+      <a class="topo-link" href="#comprar">Comprar o café</a>
+    </div>
+
+    <div class="hero-conteudo container">
+      <div>
+        <span class="selo">Entre os 50 melhores do Coffee of the Year</span>
+        <h1>O grão já fez a parte difícil. O coado é com você.</h1>
+        <p>Com um filtro de papel, água quente e três minutos, dá para tirar em casa tudo o que este café tem de doçura, aroma e acidez. A receita abaixo mostra como, e por que cada detalhe importa.</p>
+        <a class="botao" href="#receita">Ver a receita</a>
+      </div>
+
+      <!-- Ilustração de um coador pingando na jarra, feita em SVG -->
+      <svg class="ilustracao" viewBox="0 0 300 360" role="img" aria-label="Ilustração de um coador pingando café em uma jarra">
+        <!-- café dentro da jarra -->
+        <path d="M82,272 Q150,264 218,272 Q228,315 200,340 L100,340 Q72,315 82,272 Z" fill="#5A2E1E"/>
+        <!-- jarra -->
+        <path d="M105,200 L195,200 L205,230 Q235,300 200,340 L100,340 Q65,300 95,230 Z" fill="none" stroke="#F3E9DA" stroke-width="6" stroke-linejoin="round"/>
+        <!-- gota -->
+        <ellipse class="gota" cx="150" cy="190" rx="4" ry="6" fill="#D9A441"/>
+        <!-- alça do coador -->
+        <path d="M228,78 Q268,76 262,108 Q258,128 216,132" fill="none" stroke="#F3E9DA" stroke-width="9" stroke-linecap="round"/>
+        <!-- corpo do coador -->
+        <polygon points="70,62 230,62 178,168 122,168" fill="#F3E9DA"/>
+        <!-- frisos do coador -->
+        <line x1="110" y1="74" x2="138" y2="160" stroke="#CDBBA5" stroke-width="3" stroke-linecap="round"/>
+        <line x1="150" y1="74" x2="150" y2="160" stroke="#CDBBA5" stroke-width="3" stroke-linecap="round"/>
+        <line x1="190" y1="74" x2="162" y2="160" stroke="#CDBBA5" stroke-width="3" stroke-linecap="round"/>
+        <!-- borda do coador -->
+        <rect x="58" y="50" width="184" height="16" rx="5" fill="#F3E9DA"/>
+        <!-- base do coador -->
+        <rect x="108" y="166" width="84" height="10" rx="3" fill="#F3E9DA"/>
+      </svg>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===================== O QUE VOCÊ VAI PRECISAR ===================== -->
+    <section class="secao container">
+      <h2>O que você vai precisar</h2>
+      <p class="texto-intro">Nada de equipamento caro. Se você já faz café coado, provavelmente tem quase tudo em casa.</p>
+
+      <ul class="materiais">
+        <li>Suporte de filtro (V60, Melitta ou similar) e filtro de papel</li>
+        <li>15 g de café, de preferência moído na hora</li>
+        <li>250 ml de água filtrada</li>
+        <li>Chaleira, se tiver de bico fino, melhor</li>
+        <li>Uma jarra ou a própria xícara</li>
+        <li>Balança e cronômetro do celular <small>(ajudam, mas não são obrigatórios)</small></li>
+      </ul>
+    </section>
+
+    <!-- ===================== AS TRÊS VARIÁVEIS ===================== -->
+    <section class="secao variaveis">
+      <div class="container">
+        <h2>Três detalhes que mudam o resultado</h2>
+        <p class="texto-intro">Um café de alta pontuação mostra mais nuances, e também mostra mais quando algo sai do ponto. Estes são os três ajustes que mais fazem diferença.</p>
+
+        <div class="variaveis-grade">
+          <div class="variavel">
+            <h3>Proporção</h3>
+            <p class="valor">15 g de café para 250 ml de água</p>
+            <p>É o equilíbrio entre corpo e clareza. Com menos café a bebida fica rala, com mais ela pesa e amarga.</p>
+            <p>Sem balança, duas colheres de sopa bem cheias dão cerca de 15 g. Para duas xícaras, é só dobrar tudo.</p>
+          </div>
+
+          <div class="variavel">
+            <h3>Temperatura</h3>
+            <p class="valor">Entre 92 e 96 °C</p>
+            <p>Água fervendo queima os aromas mais delicados. Água morna demais não consegue extrair a doçura do grão.</p>
+            <p>Sem termômetro, desligue o fogo quando ferver e espere cerca de 30 segundos.</p>
+          </div>
+
+          <div class="variavel">
+            <h3>Moagem</h3>
+            <p class="valor">Média, parecida com açúcar cristal</p>
+            <p>Ela controla a velocidade da água. Fina demais, a água demora e puxa amargor. Grossa demais, passa rápido e o café fica azedo.</p>
+            <p>Moer na hora preserva os aromas, que começam a se perder poucos minutos depois da moagem.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== A RECEITA ===================== -->
+    <section id="receita" class="secao receita">
+      <div class="container">
+        <h2>A receita, no tempo do cronômetro</h2>
+        <p class="texto-intro">Deixe o cronômetro do celular pronto. Os tempos são uma referência: poucos segundos para mais ou para menos não estragam nada.</p>
+
+        <ol class="passos">
+          <li class="passo">
+            <span class="tempo tempo-texto">Antes</span>
+            <div class="passo-texto">
+              <h3>Enxágue o filtro</h3>
+              <p>Coloque o filtro no suporte e molhe com água quente. Isso tira o gosto de papel e aquece o suporte. Jogue fora essa água antes de continuar.</p>
+            </div>
+          </li>
+
+          <li class="passo">
+            <span class="tempo">0:00</span>
+            <div class="passo-texto">
+              <h3>Pré-infusão</h3>
+              <p>Coloque o café, faça um buraquinho no centro e despeje 30 ml de água, só o bastante para molhar todo o pó. Ele vai estufar e borbulhar: é o gás da torra saindo, sinal de café fresco. Espere 40 segundos.</p>
+            </div>
+          </li>
+
+          <li class="passo">
+            <span class="tempo">0:40</span>
+            <div class="passo-texto">
+              <h3>Primeiro despejo</h3>
+              <p>Despeje em círculos lentos, do centro para as bordas e de volta, até chegar a 150 ml. Evite jogar água direto no papel, porque ela escorre sem passar pelo café.</p>
+            </div>
+          </li>
+
+          <li class="passo">
+            <span class="tempo">1:20</span>
+            <div class="passo-texto">
+              <h3>Segundo despejo</h3>
+              <p>Quando o nível baixar um pouco, complete até 250 ml com o mesmo movimento circular.</p>
+            </div>
+          </li>
+
+          <li class="passo">
+            <span class="tempo">2:30</span>
+            <div class="passo-texto">
+              <h3>Deixe terminar de passar</h3>
+              <p>A água deve terminar de descer entre 2:30 e 3:30. Se demorar bem mais que isso, na próxima vez moa um pouco mais grosso.</p>
+            </div>
+          </li>
+
+          <li class="passo">
+            <span class="tempo tempo-texto">Depois</span>
+            <div class="passo-texto">
+              <h3>Mexa e sirva</h3>
+              <p>Mexa o café na jarra antes de servir, para misturar o começo e o fim da extração. Prove de novo quando ele amornar: é aí que as notas mais doces aparecem.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===================== AJUSTE PELO GOSTO ===================== -->
+    <section class="secao container">
+      <h2>Ajuste pelo gosto</h2>
+      <p class="texto-intro">Cada chaleira, filtro e moedor se comporta de um jeito. Se a primeira xícara não ficou do seu agrado, o próprio sabor diz o que mudar.</p>
+
+      <div class="ajustes">
+        <div class="ajuste">
+          <h3>Ficou amargo ou seco na boca</h3>
+          <p>A água extraiu demais. Na próxima, moa um pouco mais grosso ou espere a água esfriar mais alguns segundos antes de começar.</p>
+        </div>
+        <div class="ajuste">
+          <h3>Ficou azedo ou ralo</h3>
+          <p>A água extraiu de menos. Moa um pouco mais fino ou despeje mais devagar, para ela ficar mais tempo em contato com o café.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== SOBRE ESTE CAFÉ ===================== -->
+    <!-- Preencha os campos amarelos com os dados reais do lote antes de publicar -->
+    <section class="secao sobre container">
+      <div class="sobre-grade">
+        <div>
+          <h2>Sobre este café</h2>
+          <p>Cultivado nas Montanhas Capixabas e colhido à mão, respeitando o ponto de maturação de cada fruto, por uma família que trabalha com café desde 1971. Na edição <span class="preencher">[ano]</span> do Coffee of the Year, ficou entre os 50 melhores.</p>
+        </div>
+
+        <dl class="ficha">
+          <dt>Lote</dt>
+          <dd><span class="preencher">[nome do lote]</span></dd>
+
+          <dt>Produtor</dt>
+          <dd><span class="preencher">[nome do produtor]</span></dd>
+
+          <dt>Altitude</dt>
+          <dd><span class="preencher">[altitude em metros]</span></dd>
+
+          <dt>Processo</dt>
+          <dd><span class="preencher">[natural, cereja descascado...]</span></dd>
+
+          <dt>Notas</dt>
+          <dd><span class="preencher">[notas sensoriais]</span></dd>
+
+          <dt>Pontuação</dt>
+          <dd><span class="preencher">[pontuação SCA]</span></dd>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ===================== CHAMADA FINAL ===================== -->
+    <section id="comprar" class="secao chamada">
+      <div class="container">
+        <h2>Ainda não tem este café em casa?</h2>
+        <p>Peça o seu e use esta receita logo no primeiro coado.</p>
+        <!-- Troque o # pelo link da sua loja -->
+        <a class="botao" href="#">Comprar o café</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== RODAPÉ ===================== -->
+  <footer class="rodape">
+    <div class="container">
+      <p>Zé Maria Cafés Especiais. Montanhas Capixabas, desde 1971.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
